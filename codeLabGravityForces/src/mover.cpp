@@ -14,6 +14,7 @@ Mover::Mover(){
     velocity.set(1,0);
     acceleration.set(0,0);
     color.set(128,100);
+    G =0.01;
     
 }
 
@@ -44,6 +45,24 @@ void Mover::display(){
     ofCircle(location.x, location.y, mass*4);
 }
 
+ofVec2f Mover::attract(Mover m){
+    ofVec2f force;
+    force = location- m.location;
+    float distance = force.length();
+    
+    distance= ofClamp(distance, 2, 25);
+    
+    force = force.normalize();
+    
+    //This gives the unit vector in the direction of force.
+    //cout<<distance<<endl;
+    float strength = (G*mass*m.mass)/(distance*distance);
+    force =force*strength;
+    cout<<force<<endl;
+    return force;
+    
+}
+
 void Mover::checkEdges(){
     
     if(location.x>ofGetWidth()){
@@ -61,7 +80,7 @@ void Mover::checkEdges(){
         location.y = ofGetHeight();
     }
     else if(location.y<0){
-        velocity.y *=-1;
+        velocity.y *= -1;
         location.y = 0;
     }
 }

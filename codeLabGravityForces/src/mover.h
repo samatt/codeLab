@@ -18,12 +18,13 @@ public:
     void update();
     void display();
     void checkEdges();
+    ofVec2f attract(Mover m);
     ofVec2f location;
     ofVec2f velocity;
     ofVec2f acceleration;
     ofColor color;
-    
     float mass;
+    float G;
     
     
 };
