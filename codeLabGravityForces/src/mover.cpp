@@ -11,17 +11,18 @@
 Mover::Mover(){
     mass = 5;
    location.set(400, 400);
-
     velocity.set(1,0);
     acceleration.set(0,0);
+    color.set(128,100);
     
 }
 
-Mover::Mover(float m, float x, float y){
+Mover::Mover(float m, float x, float y, ofColor _c){
     mass = m;
     location.set(x,y);
     velocity.set(0.1,0);
     acceleration.set(0,0);
+    color.set(_c);
 }
 
 void Mover:: applyForce(ofVec2f force){
@@ -39,7 +40,7 @@ void Mover:: update(){
 }
 
 void Mover::display(){
-    ofSetColor(128,100);
+    ofSetColor(color);
     ofCircle(location.x, location.y, mass*4);
 }
 

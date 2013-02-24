@@ -13,7 +13,7 @@
 class Mover{
 public:
     Mover();
-    Mover(float m, float x, float y);
+    Mover(float m, float x, float y,ofColor _c);
     void applyForce(ofVec2f force);
     void update();
     void display();
@@ -21,6 +21,7 @@ public:
     ofVec2f location;
     ofVec2f velocity;
     ofVec2f acceleration;
+    ofColor color;
     
     float mass;
     
