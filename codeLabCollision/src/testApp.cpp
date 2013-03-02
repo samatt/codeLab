@@ -8,7 +8,7 @@ void testApp::setup(){
     a = Attractor();
     
     
-    for (int i =0; i<10;i++){
+    for (int i =0; i<NUM_OF_PARTICLES;i++){
         Mover _m = Mover();
         _m.init(ofRandom(1,5),ofRandom(ofGetWidth()),ofRandom(ofGetHeight()));
         m.push_back(_m);
@@ -22,7 +22,7 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     
-    for(int i =0; i<10;i++){
+    for(int i =0; i<NUM_OF_PARTICLES;i++){
         ofVec2f force = a.attract(m[i]);
         m[i].applyForce(force);
         m[i].update();
@@ -35,7 +35,7 @@ void testApp::update(){
 void testApp::draw(){
     
   //  a.display();
-    for(int i =0; i<10;i++){
+    for(int i =0; i<NUM_OF_PARTICLES;i++){
         m[i].display();
         
     }

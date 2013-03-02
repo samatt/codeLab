@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "Mover.h"
 #include "Attractor.h"
-
+#define NUM_OF_PARTICLES 100
 class testApp : public ofBaseApp{
 
 	public:
