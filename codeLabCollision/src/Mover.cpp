@@ -56,7 +56,7 @@ float Mover::checkCollison(vector<Mover>& m){
         cout<<dist<<","<<10*(mass+m[i].mass)<<endl;
         if(dist<10*(mass+m[i].mass)){
             if(dist != 0){
-                m[i].color.set(50, 50, 128);
+                m[i].color.set(ofRandom(255),ofRandom(255), ofRandom(255),128);
 
                 cout<<"here"<<endl;
             }
