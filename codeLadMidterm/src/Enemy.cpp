@@ -38,7 +38,6 @@ void Enemy::update(){
     currentTime = ofGetElapsedTimeMillis();
     if (currentTime>eventTime) {
         eventTime =currentTime+1000;
-        cout<<eventTime<<endl;
         move();
         b.x = location.x;
         b.y = location.y;

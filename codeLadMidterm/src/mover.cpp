@@ -10,8 +10,8 @@ Mover::Mover(const ofVec2f & position, ofColor cor){
     color = cor;
     isBack = false;
     mass = 5;
-    maxForce = 20;
-    maxSpeed = 20;
+    maxForce = 2;
+    maxSpeed = 2;
     
 }
 
@@ -53,11 +53,11 @@ void Mover::update(){
 
 
 void Mover::draw(){
-    
+    ofPushStyle();
     ofSetColor(color);
     ofFill();
     ofRect(location, mass,mass);
-    
+    ofPopStyle();
 }
 
 

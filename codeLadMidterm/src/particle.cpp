@@ -13,9 +13,10 @@ void ParticleSystem::setup(string name, int cx, int cy, int w, int h){
     height = h;
     hit = false;
     
+    png.resize(width, height);
     
-    for(unsigned int y = 0; y < png.height; y+=5){
-        for(unsigned int x = 0; x < png.width; x+=5){
+    for(unsigned int y = 0; y < height; y+=1){
+        for(unsigned int x = 0; x < width; x+=1){
             
             ofVec2f pixelPosition;
             pixelPosition.set(cx+x,cy+y);
@@ -88,7 +89,7 @@ void ParticleSystem::explode(int mx, int my){
         
         for(unsigned int i = 0; i < movers.size(); i++){
           
-                ofVec2f force = ofVec2f(ofRandom(-100,100), ofRandom(-100,100));
+                ofVec2f force = ofVec2f(ofRandom(-10,10), ofRandom(-10,10));
                 movers[i].applyForce(force);
             
                 

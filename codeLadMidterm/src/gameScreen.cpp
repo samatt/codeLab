@@ -16,6 +16,11 @@ gameScreen::gameScreen():Screen(255,0,0,"gameScreen"){
 void gameScreen::setup(){
     
     bgGame.loadImage("stage/8BitITP-blank.jpg");
+    furniture.resize(4);
+    furniture[0].setup("furniture/round-table.png", 605, 436, 50, 50);
+    furniture[1].setup("furniture/round-table.png", 605, 282, 50, 50);
+    furniture[2].setup("furniture/round-table.png", 760, 278, 50, 50);
+    furniture[3].setup("furniture/round-table.png", 771, 449, 50, 50);
     player = Player();
     for(int i=0; i<NUM_OF_ENEMIES;i++){
         Enemy e= Enemy(ofVec2f(ofRandom(500, 800), ofRandom(100,200)));
@@ -25,23 +30,37 @@ void gameScreen::setup(){
 
 void gameScreen::update(){
     player.update();
+    
+    for(unsigned int j = 0; j < furniture.size(); j++){
+        furniture[j].update();
+    }
+    
+    for(int i=0; i<NUM_OF_ENEMIES;i++){
+        enemies[i].update();
+    }
+    
     for(int x=0;x<guns.size();x++){
         guns[x].update();
         if(!guns[x].checkEdges()){
             if(guns.size()>2 ){
-            
+                
                 //debug
-            cout<<guns.size()<<endl;
-            
-            //delete this vector value
-            guns.erase(guns.begin()+(x-1));        
+                cout<<guns.size()<<endl;
+                
+                //delete this vector value
+                guns.erase(guns.begin()+(x-1));
+            }
+        }
+        else{
+            for(unsigned int i = 0; i < furniture.size(); i++){
+                ofVec2f b = guns[x].bullet();
+                furniture[i].explode(b.x, b.y);
+                
             }
         }
     }
-
-    for(int i=0; i<NUM_OF_ENEMIES;i++){
-        enemies[i].update();
-    }
+    
+    
 }
 
 void gameScreen::draw(){
@@ -50,12 +69,19 @@ void gameScreen::draw(){
     player.display();
     
     for(int x=0;x<guns.size();x++){
-      guns[x].display();
-
+        guns[x].display();
+        
     }
-    
     for(int i =0; i<NUM_OF_ENEMIES;i++){
         enemies[i].display();
+    }
+    
+    for(unsigned int j = 0; j < furniture.size(); j++){
+        furniture[j].draw();
+    }
+    
+    for(unsigned int i = 0; i < furniture.size(); i++){
+        furniture[i].drawExplosion();
     }
     
 }

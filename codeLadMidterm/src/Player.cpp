@@ -23,7 +23,7 @@ Player::Player(){
     b.y = location.y;
     b.width = PLAYER_WIDTH;
     b.height = PLAYER_HEIGHT;
-
+    
     
     avatar = new ofImage("player/surya-front.png");
     boundaryMap.loadImage("stage/hit-map.jpg");
@@ -31,7 +31,7 @@ Player::Player(){
     sprites[1].loadImage("player/surya-back.png");
     sprites[2].loadImage("player/surya-left.png");
     sprites[3].loadImage("player/surya-right.png");
-
+    
     cout << avatar << " " << &sprites[0] << endl;
 }
 
@@ -43,7 +43,6 @@ Player::Player( float x, float y){
     sprites[1].loadImage("player/surya-back.png");
     sprites[2].loadImage("player/surya-left.png");
     sprites[3].loadImage("player/surya-right.png");
-    // avtar.loadImage("player/surya-front.png");
     avatar = &sprites[0];
     
 }
@@ -77,31 +76,29 @@ void Player:: move(int key){
                 cout<<"im in move"<<endl;
                 break;
         }
-
+        
     }
     else{
         switch (key) {
             case OF_KEY_UP:
                 if(currentDirection.y==-1){
-                location.y+=10;    
+                    location.y+=10;
                 }
-                
                 break;
             case OF_KEY_DOWN:
                 if(currentDirection.y== 1){
-                location.y-=10;
+                    location.y-=10;
                 }
-
                 break;
             case OF_KEY_LEFT:
                 if(currentDirection.x ==-1){
-                location.x+=10;    
+                    location.x+=10;
                 }
                 
                 break;
             case OF_KEY_RIGHT:
                 if(currentDirection.x == 1){
-                location.x-=10;    
+                    location.x-=10;
                 }
                 
                 break;
@@ -110,7 +107,7 @@ void Player:: move(int key){
                 break;
         }
     }
-        
+    
     
 }
 
@@ -120,7 +117,7 @@ void Player::update(){
     b.y = location.y;
 }
 void Player::display(){
-
+    
     avatar->draw(location.x, location.y,PLAYER_WIDTH,PLAYER_HEIGHT);
     
 }
@@ -141,25 +138,25 @@ void Player::display(){
 
 
 Boolean Player::checkEdges(){
-             //
-   for(int j=0;j<PLAYER_WIDTH;j++){
-   for(int i=0;i<PLAYER_HEIGHT;i++){
-       
-       ofColor c = boundaryMap.getPixelsRef().getColor(location.x+j,location.y+i);
-
-           if(c.b<254){
-              //    cout<<"here"<<endl;
-              // cout<<c<<endl;
-               return false;
-
-           }
-       }
-   }
-   return true;
-
+    //
+    for(int j=0;j<PLAYER_WIDTH;j++){
+        for(int i=0;i<PLAYER_HEIGHT;i++){
+            
+            ofColor c = boundaryMap.getPixelsRef().getColor(location.x+j,location.y+i);
+            
+            if(c.b<254){
+                //    cout<<"here"<<endl;
+                // cout<<c<<endl;
+                return false;
+                
+            }
+        }
+    }
+    return true;
+    
 }
 
 Player::~Player() {
-
- //   delete avatar;
+    
+    //   delete avatar;
 }
