@@ -13,6 +13,7 @@
 #include "Screen.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "gun.h"
 #define NUM_OF_ENEMIES 4
 
 class gameScreen:public Screen{
@@ -28,11 +29,10 @@ public:
     void mousePressed();
     void keyPressed(int key);
     
-    
+    vector<gun> guns;
     ofImage bgGame;
     ofImage boundaryMap;
     Player player;
-//    Enemy enemy;
     vector<Enemy> enemies;
     
 };

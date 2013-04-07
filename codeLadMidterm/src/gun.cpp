@@ -30,9 +30,21 @@ void gun::display(){
     ofRect(loc, 5, 5);
 }
 
-ofPoint gun::shoot(){
+void gun::shoot(ofVec2f l, ofVec2f dir){
+    loc.set(l);
     ploc.set(loc.x,loc.y);
-    acc.set(0,-2.0);
+    dir=dir.normalized();
+    acc.set(dir);
+    acc *= 0.1;
+    cout<<acc<<endl;
+
+}
+
+Boolean gun::checkEdges(){
+    if((loc.x<0||loc.x||ofGetWidth())&&(loc.y<0||loc.y>ofGetHeight())){
+        return false;
+    }
+    return true;
 }
 
 ofPoint gun::bullet(){

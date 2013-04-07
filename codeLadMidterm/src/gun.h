@@ -17,13 +17,16 @@ public:
     ofPoint ploc;
     ofVec2f vel;
     ofVec2f acc;
+
     
     gun();
     gun(float x, float y);
     
     void update();
     void display();
-    ofPoint shoot();
+    void shoot(ofVec2f l, ofVec2f dir);
+    Boolean checkEdges();
+    
     ofPoint bullet();
     ofPoint reload();
     

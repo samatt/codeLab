@@ -13,8 +13,8 @@
 #include "ofMain.h"
 #include "Enemy.h"
 #include "BoundingBox.h"
-#define DRAW_WIDTH 40
-#define DRAW_HEIGHT 60
+#define PLAYER_WIDTH 40
+#define PLAYER_HEIGHT 60
 class Player{
 public:
     Player();
@@ -30,6 +30,7 @@ public:
     
     ofImage* avatar;
     ofVec2f location;
+    ofVec2f currentDirection;
     ofVec2f velocity;
     ofVec2f acceleration;
     boundingBox b;
