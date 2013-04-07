@@ -13,6 +13,7 @@
 #include "Screen.h"
 #include "Player.h"
 #include "Enemy.h"
+#define NUM_OF_ENEMIES 4
 
 class gameScreen:public Screen{
     
@@ -31,8 +32,8 @@ public:
     ofImage bgGame;
     ofImage boundaryMap;
     Player player;
-    Enemy enemy;
-    
+//    Enemy enemy;
+    vector<Enemy> enemies;
     
 };
 #endif /* defined(__codeLabObjects2__gameScreen__) */

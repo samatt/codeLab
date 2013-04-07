@@ -17,6 +17,10 @@ Enemy::Enemy(){
     counter = 0;
     eventTime =0;
     
+    b.x = location.x;
+    b.y = location.y;
+    b.width = ENEMY_WIDTH;
+    b.height = ENEMY_HEIGHT;
     
 }
 
@@ -35,7 +39,9 @@ void Enemy::update(){
     if (currentTime>eventTime) {
         eventTime =currentTime+1000;
         cout<<eventTime<<endl;
-        move();   
+        move();
+        b.x = location.x;
+        b.y = location.y;
     }
      
     

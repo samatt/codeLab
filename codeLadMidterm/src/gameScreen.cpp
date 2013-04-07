@@ -17,18 +17,28 @@ void gameScreen::setup(){
     
     bgGame.loadImage("stage/8BitITP.jpeg");
     player = Player();
-    enemy = Enemy();
+    for(int i=0; i<NUM_OF_ENEMIES;i++){
+        
+        Enemy e= Enemy(ofVec2f(ofRandom(500, 800), ofRandom(100,200)));
+        enemies.push_back(e);
+    }
 }
 
 void gameScreen::update(){
-    enemy.update();
+    player.update();
+    for(int i=0; i<NUM_OF_ENEMIES;i++){
+        enemies[i].update();
+    }
 }
 
 void gameScreen::draw(){
+    
     bgGame.draw(0, 0,ofGetWidth(),ofGetHeight());
     player.display();
-    enemy.display();
-
+    for(int i =0; i<NUM_OF_ENEMIES;i++){
+        enemies[i].display();
+    }
+    
 }
 
 void gameScreen::mousePressed(){
@@ -45,6 +55,6 @@ void gameScreen::keyPressed(int key){
 
 void gameScreen::exit(){
     cout<<"exit game screen"<<endl;
-    player.~Player();
+    //player.~Player();
 }
 

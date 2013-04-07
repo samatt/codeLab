@@ -11,6 +11,8 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Enemy.h"
+#include "BoundingBox.h"
 #define DRAW_WIDTH 40
 #define DRAW_HEIGHT 60
 class Player{
@@ -20,18 +22,20 @@ public:
     Player(float x, float y);
     
     void move(int key);
+    void update();
     void draw();
     void display();
     Boolean checkEdges();
-
-    ofImage* avatar;
-    vector<ofImage> sprites;
+    Boolean checkCollision(vector<Enemy> e);
     
+    ofImage* avatar;
     ofVec2f location;
     ofVec2f velocity;
     ofVec2f acceleration;
+    boundingBox b;
 private:
     ofImage boundaryMap;
+    vector<ofImage> sprites;
 };
 
 #endif /* defined(__codeLadMidterm__Player__) */

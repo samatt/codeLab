@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "BoundingBox.h"
 #define ENEMY_WIDTH 10
 #define ENEMY_HEIGHT 10
 class Enemy{
@@ -28,7 +29,7 @@ public:
     ofVec2f location;
     ofVec2f velocity;
     ofVec2f acceleration;
-    
+    boundingBox b;
 private:
     ofImage boundaryMap;
     int counter;

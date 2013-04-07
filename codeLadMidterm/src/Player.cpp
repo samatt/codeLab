@@ -16,6 +16,12 @@ Player::Player(){
     for (int i = 0; i < 4; ++i) {
         sprites[i].allocate(80, 115, OF_IMAGE_COLOR);
     }
+    
+    b.x = location.x;
+    b.y = location.y;
+    b.width = DRAW_WIDTH;
+    b.height = DRAW_HEIGHT;
+    
     avatar = new ofImage("player/surya-front.png");
     boundaryMap.loadImage("stage/hit-map.jpg");
     sprites[0].loadImage("player/surya-front.png");
@@ -90,14 +96,29 @@ void Player:: move(int key){
     
 }
 
+void Player::update(){
+    b.x = location.x;
+    b.y = location.y;
+}
 void Player::display(){
-    //    ofFill();
 
     avatar->draw(location.x, location.y,DRAW_WIDTH,DRAW_HEIGHT);
     
 }
 
-
+//Boolean Player::checkCollision(vector<Enemy> e) {
+//
+//    for(int i =)
+//    if (!((box1.x + box1.width) >= box2.x)) {
+//    return 0;     }
+//    if (!(box1.x <= (box2.x + box2.width))) {
+//        return 0;     }
+//    if (!((box1.y - box1.height) <= box2.y)) {
+//        return 0;     }
+//    if (!(box1.y >= (box2.y - box2.height))) {
+//        return 0;     }
+//    return 1; }
+//
 
 Boolean Player::checkEdges(){
              //
