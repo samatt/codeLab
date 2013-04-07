@@ -31,6 +31,7 @@ Player::Player(){
     sprites[1].loadImage("player/surya-back.png");
     sprites[2].loadImage("player/surya-left.png");
     sprites[3].loadImage("player/surya-right.png");
+
     cout << avatar << " " << &sprites[0] << endl;
 }
 
@@ -81,16 +82,28 @@ void Player:: move(int key){
     else{
         switch (key) {
             case OF_KEY_UP:
-                location.y+=10;
+                if(currentDirection.y==-1){
+                location.y+=10;    
+                }
+                
                 break;
             case OF_KEY_DOWN:
+                if(currentDirection.y== 1){
                 location.y-=10;
+                }
+
                 break;
             case OF_KEY_LEFT:
-                location.x+=10;
+                if(currentDirection.x ==-1){
+                location.x+=10;    
+                }
+                
                 break;
             case OF_KEY_RIGHT:
-                location.x-=10;
+                if(currentDirection.x == 1){
+                location.x-=10;    
+                }
+                
                 break;
             default:
                 cout<<"im in move"<<endl;
@@ -102,6 +115,7 @@ void Player:: move(int key){
 }
 
 void Player::update(){
+    boundaryMap.resize(ofGetWidth(), ofGetHeight());
     b.x = location.x;
     b.y = location.y;
 }
@@ -130,6 +144,7 @@ Boolean Player::checkEdges(){
              //
    for(int j=0;j<PLAYER_WIDTH;j++){
    for(int i=0;i<PLAYER_HEIGHT;i++){
+       
        ofColor c = boundaryMap.getPixelsRef().getColor(location.x+j,location.y+i);
 
            if(c.b<254){

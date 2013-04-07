@@ -15,7 +15,7 @@ gameScreen::gameScreen():Screen(255,0,0,"gameScreen"){
 
 void gameScreen::setup(){
     
-    bgGame.loadImage("stage/8BitITP.jpeg");
+    bgGame.loadImage("stage/8BitITP-blank.jpg");
     player = Player();
     for(int i=0; i<NUM_OF_ENEMIES;i++){
         Enemy e= Enemy(ofVec2f(ofRandom(500, 800), ofRandom(100,200)));
@@ -29,6 +29,10 @@ void gameScreen::update(){
         guns[x].update();
         if(!guns[x].checkEdges()){
             if(guns.size()>2 ){
+            
+                //debug
+            cout<<guns.size()<<endl;
+            
             //delete this vector value
             guns.erase(guns.begin()+(x-1));        
             }
@@ -44,7 +48,7 @@ void gameScreen::draw(){
     
     bgGame.draw(0, 0,ofGetWidth(),ofGetHeight());
     player.display();
-    cout<<guns.size()<<endl;
+    
     for(int x=0;x<guns.size();x++){
       guns[x].display();
 
@@ -71,9 +75,12 @@ void gameScreen::keyPressed(int key){
     else if(key==' '){
         gun g = gun();
         guns.push_back(g);
+        
         ofVec2f a = ofVec2f();
+        //shoot from the center of the player
         a.x = player.location.x+player.b.width/2;
         a.y = player.location.y+player.b.height/2;
+        
         //shoot the latest bullet
         guns[guns.size()-1].shoot(a,player.currentDirection);
     }

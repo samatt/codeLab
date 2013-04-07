@@ -10,5 +10,9 @@
 #define codeLadMidterm_BoundingBox_h
 
 
-
+struct boundingBox {
+    int x;
+    int y;
+    int height;
+    int width; };
 #endif

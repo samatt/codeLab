@@ -12,6 +12,9 @@
 		18CF71B0170F3617006B612D /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CF71AC170F3617006B612D /* Screen.cpp */; };
 		18CF71B5170F4464006B612D /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CF71B3170F4464006B612D /* Player.cpp */; };
 		18CF71BB170F4880006B612D /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CF71B9170F4880006B612D /* Enemy.cpp */; };
+		18CF71F01711CDFA006B612D /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CF71EC1711CDFA006B612D /* particle.cpp */; };
+		18CF71F11711CDFA006B612D /* mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CF71EE1711CDFA006B612D /* mover.cpp */; };
+		18CF71F51711CE2B006B612D /* gun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CF71F31711CE2B006B612D /* gun.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -75,6 +78,13 @@
 		18CF71B4170F4464006B612D /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		18CF71B9170F4880006B612D /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
 		18CF71BA170F4880006B612D /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		18CF71E51710D164006B612D /* BoundingBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BoundingBox.h; path = ../BoundingBox.h; sourceTree = "<group>"; };
+		18CF71EC1711CDFA006B612D /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle.cpp; sourceTree = "<group>"; };
+		18CF71ED1711CDFA006B612D /* particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particle.h; sourceTree = "<group>"; };
+		18CF71EE1711CDFA006B612D /* mover.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mover.cpp; sourceTree = "<group>"; };
+		18CF71EF1711CDFA006B612D /* mover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mover.h; sourceTree = "<group>"; };
+		18CF71F31711CE2B006B612D /* gun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gun.cpp; sourceTree = "<group>"; };
+		18CF71F41711CE2B006B612D /* gun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gun.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -160,6 +170,26 @@
 			name = Enemy;
 			sourceTree = "<group>";
 		};
+		18CF71EB1711CDD3006B612D /* Explosion */ = {
+			isa = PBXGroup;
+			children = (
+				18CF71EC1711CDFA006B612D /* particle.cpp */,
+				18CF71ED1711CDFA006B612D /* particle.h */,
+				18CF71EE1711CDFA006B612D /* mover.cpp */,
+				18CF71EF1711CDFA006B612D /* mover.h */,
+			);
+			name = Explosion;
+			sourceTree = "<group>";
+		};
+		18CF71F21711CE1A006B612D /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				18CF71F31711CE2B006B612D /* gun.cpp */,
+				18CF71F41711CE2B006B612D /* gun.h */,
+			);
+			name = Weapons;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +260,9 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				18CF71F21711CE1A006B612D /* Weapons */,
+				18CF71EB1711CDD3006B612D /* Explosion */,
+				18CF71E51710D164006B612D /* BoundingBox.h */,
 				18CF71B7170F4847006B612D /* Enemy */,
 				18CF71B2170F43D8006B612D /* Players */,
 				18CF71B1170F361E006B612D /* Screen */,
@@ -340,6 +373,9 @@
 				18CF71B0170F3617006B612D /* Screen.cpp in Sources */,
 				18CF71B5170F4464006B612D /* Player.cpp in Sources */,
 				18CF71BB170F4880006B612D /* Enemy.cpp in Sources */,
+				18CF71F01711CDFA006B612D /* particle.cpp in Sources */,
+				18CF71F11711CDFA006B612D /* mover.cpp in Sources */,
+				18CF71F51711CE2B006B612D /* gun.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
