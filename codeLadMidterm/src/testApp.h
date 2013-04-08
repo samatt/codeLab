@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "introScreen.h"
 #include "gameScreen.h"
+#include "gameOverScreen.h"
 
 class testApp : public ofBaseApp{
     
@@ -14,7 +15,7 @@ public:
     
     introScreen intro;
     gameScreen game;
-   
+    gameOverScreen   over;
     void setup();
     void update();
     void draw();

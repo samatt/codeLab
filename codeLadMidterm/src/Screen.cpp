@@ -36,7 +36,9 @@ void Screen::draw(){
 void Screen::mousePressed(){
     
 }
-
+void Screen::loadPlayer(int p){
+    
+}
 void Screen::keyPressed(int key){
     
 }

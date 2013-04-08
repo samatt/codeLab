@@ -22,5 +22,11 @@ public:
     void draw();
     void mousePressed();
     
+    ofImage start;
+    ofImage  kate;
+    ofImage sur;
+    int player;
+    float mx;
+  
 };
 #endif /* defined(__codeLabObjects2__introScreen__) */

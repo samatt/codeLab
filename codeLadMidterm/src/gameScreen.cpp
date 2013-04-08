@@ -14,31 +14,53 @@ gameScreen::gameScreen():Screen(255,0,0,"gameScreen"){
 }
 
 void gameScreen::setup(){
-    boundaryMap.loadImage("stage/hit-map.jpg");
+    //boundaryMap.loadImage("stage/8BitITP.svg");
+    gameOver = false;
     bgGame.loadImage("stage/8BitITP-blank-1.jpg");
+    score = 0;
+    
+    food[0].loadImage("food/burger.png");
+    food[1].loadImage("food/pizza.png");
+    score =0;
+    foodpos.resize(12);
+    
+    foodpos[0].set(630,275);
+    foodpos[1].set(764,338);
+    foodpos[2].set(582,454);
+    foodpos[3].set(735,450);
+    foodpos[4].set(775,545);
+    foodpos[5].set(900,310);
+    foodpos[6].set(900,460);
+    foodpos[7].set(715,125);
+    foodpos[8].set(269,190);
+    foodpos[9].set(40,190);
+    foodpos[10].set(150,85);
+    foodpos[11].set(900,200);
+    
+
     furniture.resize(42);
     
-    furniture[0].setup("furniture/m-chair-1.png", 660,235, 35, 35);
-    furniture[1].setup("furniture/m-chair-2.png", 595,235, 35, 35);
-    furniture[2].setup("furniture/m-chair-3.png", 595,300, 35, 35);
+    furniture[0].setup("furniture/m-chair-1.png", 660,235, 25, 25);
+    furniture[1].setup("furniture/m-chair-2.png", 595,235, 25, 25);
+    furniture[2].setup("furniture/m-chair-3.png", 595,300, 25, 25);
     furniture[3].setup("furniture/round-table.png", 610, 250, 65, 63);
     
     
-    furniture[4].setup("furniture/m-chair-2.png", 720,300, 35, 35);
-    furniture[5].setup("furniture/m-chair-3.png", 725,360, 35, 35);
-    furniture[6].setup("furniture/m-chair-4.png", 785,360, 35, 35);
+    furniture[4].setup("furniture/m-chair-2.png", 720,300, 25, 25);
+    furniture[5].setup("furniture/m-chair-3.png", 725,360, 25, 25);
+    furniture[6].setup("furniture/m-chair-4.png", 785,360, 25, 25);
     furniture[7].setup("furniture/round-table.png", 740,315, 65, 63);
     
     
-    furniture[8].setup("furniture/m-chair-2.png", 540,415, 35, 35);
-    furniture[9].setup("furniture/m-chair-4.png", 610,475, 35, 35);
-    furniture[10].setup("furniture/m-chair-1.png", 610,415, 35, 35);
+    furniture[8].setup("furniture/m-chair-2.png", 540,415, 25, 25);
+    furniture[9].setup("furniture/m-chair-4.png", 610,475, 25, 25);
+    furniture[10].setup("furniture/m-chair-1.png", 610,415, 25,25);
     furniture[11].setup("furniture/round-table.png", 560,430, 65, 63);
     
     
-    furniture[12].setup("furniture/m-chair-2.png", 720,500, 35, 35);
-    furniture[13].setup("furniture/m-chair-4.png", 700,630, 35, 35);
-    furniture[14].setup("furniture/m-chair-1.png", 800,500, 35, 35);
+    furniture[12].setup("furniture/m-chair-2.png", 720,500, 25, 25);
+    furniture[13].setup("furniture/m-chair-4.png", 700,630, 25, 25);
+    furniture[14].setup("furniture/m-chair-1.png", 800,500, 25, 25);
     furniture[15].setup("furniture/round-table.png", 750,515, 65, 63);
     
     furniture[16].setup("furniture/o-chair.png", 890,190, 35, 30);
@@ -81,22 +103,24 @@ void gameScreen::setup(){
     furniture[41].setup("furniture/tiny-table.png", 380,58, 45, 42);
     
     /*
-    furniture.resize(5);
-    furniture[0].setup("furniture/garbage.png", 100, 700, 50, 50);
-    furniture[1].setup("furniture/round-table.png", 605, 436, 50, 50);
-    furniture[2].setup("furniture/round-table.png", 605, 282, 50, 50);
-    furniture[3].setup("furniture/round-table.png", 760, 278, 50, 50);
-    furniture[4].setup("furniture/round-table.png", 771, 449, 50, 50);
-    */
-    player = Player();
+     furniture.resize(5);
+     furniture[0].setup("furniture/garbage.png", 100, 700, 50, 50);
+     furniture[1].setup("furniture/round-table.png", 605, 436, 50, 50);
+     furniture[2].setup("furniture/round-table.png", 605, 282, 50, 50);
+     furniture[3].setup("furniture/round-table.png", 760, 278, 50, 50);
+     furniture[4].setup("furniture/round-table.png", 771, 449, 50, 50);
+     */
+   // player = Player();
     for(int i=0; i<NUM_OF_ENEMIES;i++){
         Enemy e= Enemy(ofVec2f(ofRandom(500, 800), ofRandom(100,200)));
         enemies.push_back(e);
     }
 }
-
+void gameScreen::loadPlayer(int p){
+    player = Player(p);
+}
 void gameScreen::update(){
-
+    
     player.update();
     
     if(furniture.size()>0){
@@ -107,8 +131,6 @@ void gameScreen::update(){
             }
         }
     }
-    
-    cout<<player.checkCollision(furniture)<<endl;
     
     for(int i=0; i<NUM_OF_ENEMIES;i++){
         enemies[i].update();
@@ -139,14 +161,37 @@ void gameScreen::update(){
             
         }
     }
+    if(foodpos.size()>0){
+        for(int f=0;f<foodpos.size();f++){
+            
+            boundingBox b;
+            b.x = foodpos[f].x;
+            b.y = foodpos[f].y;
+            b.width = FOOD_WIDTH;
+            b.height = FOOD_HEIGHT;
+            if (player.isFood(b)) {
+                //  cout<<f<<player.isFood(b)<<endl;
+                foodpos.erase(foodpos.begin()+f);
+                score++;
+            }
+            
+        }
+    }
+    
+    for(int k=0;k<enemies.size();k++){
+        
+        if(player.isFood(enemies[k].b)){
+            gameOver = true;
+        }
+    }
+
     
     
 }
 
 void gameScreen::draw(){
     
-//    bgGame.draw(0, 0,ofGetWidth(),ofGetHeight());
-    boundaryMap.draw(0, 0,ofGetWidth(),ofGetHeight());
+    bgGame.draw(0, 0,ofGetWidth(),ofGetHeight());
     player.display();
     
     for(int x=0;x<guns.size();x++){
@@ -155,6 +200,12 @@ void gameScreen::draw(){
     }
     for(int i =0; i<NUM_OF_ENEMIES;i++){
         enemies[i].display();
+    }
+    
+    ofSeedRandom(9);
+    for (int i=0; i<foodpos.size(); i++){
+        int imgnum = (ofRandom(0,2));
+        food[imgnum].draw(foodpos[i].x,foodpos[i].y,FOOD_WIDTH,FOOD_HEIGHT);
     }
     if (furniture.size()>0) {
         for(unsigned int j = 0; j < furniture.size(); j++){
@@ -166,20 +217,32 @@ void gameScreen::draw(){
         }
     }
     
+    ofDrawBitmapString(ofToString(score), 121,672);
     
+    if(gameOver){
+        cout<<"game over"<<endl;
+          testApp* app = (testApp*)ofGetAppPtr();
+        app->currentScreen = &app->over;
+        app->currentScreen->setup();
+
+    }
 }
 
 void gameScreen::mousePressed(){
     cout<<"game screen mouse pressed";
-    testApp* app = (testApp*)ofGetAppPtr();
-    app->currentScreen = &app->intro;
-    app->currentScreen->setup();
     
 }
 
 void gameScreen::keyPressed(int key){
     if(key==OF_KEY_UP||key==OF_KEY_DOWN||key==OF_KEY_RIGHT||key==OF_KEY_LEFT){
-        player.move(key);
+        if(player.isCollided(furniture)==0){
+            player.move(key);
+        }
+        else{
+            player.alternateMove(key);
+        }
+        
+        
     }
     else if(key==' '){
         gun g = gun();

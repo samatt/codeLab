@@ -23,6 +23,7 @@ public:
     virtual void mousePressed();
     virtual void keyPressed(int key);
     virtual void exit();
+    virtual void loadPlayer(int p);
     ofColor bgColor;
     string name;
 

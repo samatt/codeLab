@@ -15,8 +15,10 @@
 #include "Enemy.h"
 #include "gun.h"
 #include "particle.h"
+#include "BoundingBox.h"
 #define NUM_OF_ENEMIES 2
-
+#define FOOD_WIDTH 20
+#define FOOD_HEIGHT 20
 class gameScreen:public Screen{
     
 public:
@@ -26,7 +28,7 @@ public:
     void update();
     void draw();
     void exit();
-    
+    void loadPlayer(int p);
     void mousePressed();
     void keyPressed(int key);
     
@@ -36,5 +38,13 @@ public:
     Player player;
     vector<Enemy> enemies;
     vector<ParticleSystem> furniture;
+    int score;
+    vector<ofPoint> foodpos;
+    ofImage food[2];
+    int imgnum;
+    
+    bool gameOver;
+   // int score;
+
 };
 #endif /* defined(__codeLabObjects2__gameScreen__) */

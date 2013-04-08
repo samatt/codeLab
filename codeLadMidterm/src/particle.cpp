@@ -42,10 +42,10 @@ void ParticleSystem::update(){
 
 
 void ParticleSystem::draw(){
-    ofPushStyle();
-    ofSetColor(0, 0, 128);
-    ofCircle(centerX, centerY, 10);
-    ofPopStyle();
+//    ofPushStyle();
+//    ofSetColor(0, 0, 128);
+//    ofCircle(centerX, centerY, 10);
+//    ofPopStyle();
     for(unsigned int i = 0; i < movers.size(); i++){
         if(movers[i].location == movers[i].initialLoc) movers[i].draw();
     }
@@ -57,7 +57,7 @@ bool ParticleSystem::isExploded(){
     float dist = ofDist(movers[0].location.x, movers[0].location.y, movers[0].initialLoc.x, movers[0].initialLoc.y);
     
     //if a pixel has moved more than 200 pxs from its original position its safe to assume it has explded
-    if(dist>50){
+    if(dist>30){
         return true;
     }
     else{
@@ -85,6 +85,35 @@ void ParticleSystem::drawTarget(int mx, int my){
     }
     
 }
+
+//bool ParticleSystem::isCollided(Player p) {
+//    
+//    //for(int i =0; i<p.size();i++){
+//    if (!((p.b.x + p.b.width) >= (centerX))) {
+//        
+//        return 0;
+//    }
+//    
+//    if (!(p.b.x <= (centerX + width))) {
+//        
+//        return 0;
+//    }
+//    
+//    if (!((p.b.y - p.b.height) <= centerY)) {
+//        
+//        return 0;
+//    }
+//    
+//    if (!(p.b.y >= (centerY - height))) {
+//        return 0;
+//        
+//    }
+//    
+//    //}
+//    
+//    return 1;
+//    
+//}
 
 
 bool ParticleSystem::explode(int mx, int my){

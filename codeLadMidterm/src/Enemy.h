@@ -12,8 +12,8 @@
 #include <iostream>
 #include "ofMain.h"
 #include "BoundingBox.h"
-#define ENEMY_WIDTH 10
-#define ENEMY_HEIGHT 10
+#define ENEMY_WIDTH 40
+#define ENEMY_HEIGHT 60
 class Enemy{
     
 public:
@@ -30,11 +30,13 @@ public:
     ofVec2f velocity;
     ofVec2f acceleration;
     boundingBox b;
+    ofImage* avatar;
 private:
     ofImage boundaryMap;
     int counter;
     unsigned long currentTime;
     unsigned long eventTime;
+        vector<ofImage> sprites;
     
     
 };
