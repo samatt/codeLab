@@ -21,7 +21,7 @@ gun::gun(float _x, float _y){
 void gun::update(){
     loc+=vel;
     vel+=acc;
-    vel.limit(20);
+    vel.limit(30);
     
 
 }
@@ -35,8 +35,8 @@ void gun::shoot(ofVec2f l, ofVec2f dir){
     ploc.set(loc.x,loc.y);
     dir=dir.normalized();
     acc.set(dir);
-    acc *= 0.1;
-    cout<<acc<<endl;
+    acc *= 0.95;
+//    cout<<acc<<endl;
 
 }
 

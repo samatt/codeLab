@@ -12,6 +12,7 @@
 #include <iostream>
 #include "ofMain.h"
 #include "Enemy.h"
+#include "particle.h"
 #include "BoundingBox.h"
 #define PLAYER_WIDTH 40
 #define PLAYER_HEIGHT 60
@@ -25,8 +26,8 @@ public:
     void update();
     void draw();
     void display();
-    Boolean checkEdges();
-    Boolean checkCollision(vector<Enemy> e);
+    bool checkEdges();
+    bool checkCollision(vector<ParticleSystem> p);
     
     ofImage* avatar;
     ofVec2f location;

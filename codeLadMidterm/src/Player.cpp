@@ -25,12 +25,12 @@ Player::Player(){
     b.height = PLAYER_HEIGHT;
     
     
-    avatar = new ofImage("player/surya-front.png");
+    avatar = new ofImage("player/katie-front.png");
     boundaryMap.loadImage("stage/hit-map.jpg");
-    sprites[0].loadImage("player/surya-front.png");
-    sprites[1].loadImage("player/surya-back.png");
-    sprites[2].loadImage("player/surya-left.png");
-    sprites[3].loadImage("player/surya-right.png");
+    sprites[0].loadImage("player/katie-front.png");
+    sprites[1].loadImage("player/katie-back.png");
+    sprites[2].loadImage("player/katie-left.png");
+    sprites[3].loadImage("player/katie-right.png");
     
     cout << avatar << " " << &sprites[0] << endl;
 }
@@ -49,65 +49,53 @@ Player::Player( float x, float y){
 
 
 void Player:: move(int key){
-    if(checkEdges()){
-        switch (key) {
-            case OF_KEY_UP:
+    //    if(checkEdges()){
+    switch (key) {
+        case OF_KEY_UP:
+            if(!checkEdges()&&currentDirection.y ==-1){
+                location.y+=10;
+            }
+            else{
                 location.y-=10;
                 avatar = &sprites[1];
                 currentDirection.set(0,-1);
-                break;
-            case OF_KEY_DOWN:
+            }
+            
+            break;
+        case OF_KEY_DOWN:
+            if(!checkEdges()&&currentDirection.y ==1){
+                location.y-=10;
+            }
+            else{
                 location.y+=10;
                 avatar = &sprites[0];
                 currentDirection.set(0,1);
-                break;
-            case OF_KEY_LEFT:
+            }
+            break;
+        case OF_KEY_LEFT:
+            if(!checkEdges()&&currentDirection.x ==-1){
+                location.x+=10;
+            }
+            else{
                 location.x-=10;
                 avatar = &sprites[2];
                 currentDirection.set(-1,0);
-                
-                break;
-            case OF_KEY_RIGHT:
+            }
+            break;
+        case OF_KEY_RIGHT:
+            if(!checkEdges()&&currentDirection.x ==1){
+                location.x -= 10;
+            }else{
                 location.x+=10;
                 avatar = &sprites[3];
                 currentDirection.set(1,0);
-                break;
-            default:
-                cout<<"im in move"<<endl;
-                break;
-        }
-        
+            }
+            
+            break;
+        default:
+            cout<<"im in move"<<endl;
+            break;
     }
-    else{
-        switch (key) {
-            case OF_KEY_UP:
-                if(currentDirection.y==-1){
-                    location.y+=10;
-                }
-                break;
-            case OF_KEY_DOWN:
-                if(currentDirection.y== 1){
-                    location.y-=10;
-                }
-                break;
-            case OF_KEY_LEFT:
-                if(currentDirection.x ==-1){
-                    location.x+=10;
-                }
-                
-                break;
-            case OF_KEY_RIGHT:
-                if(currentDirection.x == 1){
-                    location.x-=10;
-                }
-                
-                break;
-            default:
-                cout<<"im in move"<<endl;
-                break;
-        }
-    }
-    
     
 }
 
@@ -121,26 +109,43 @@ void Player::display(){
     avatar->draw(location.x, location.y,PLAYER_WIDTH,PLAYER_HEIGHT);
     
 }
-//
-//Boolean Player::checkCollision(vector<Enemy> e) {
-//
-//    for(int i =)
-//    if (!((box1.x + box1.width) >= box2.x)) {
-//    return 0;     }
-//    if (!(box1.x <= (box2.x + box2.width))) {
-//        return 0;     }
-//    if (!((box1.y - box1.height) <= box2.y)) {
-//        return 0;     }
-//    if (!(box1.y >= (box2.y - box2.height))) {
-//        return 0;     }
-//    return 1;
-//}
+
+bool Player::checkCollision(vector<ParticleSystem> p) {
+    
+    //for(int i =0; i<p.size();i++){
+    if (!((b.x + b.width) >= (p[3].centerX))) {
+        
+        return 0;
+    }
+    
+    if (!(b.x <= (p[3].centerX + p[3].width))) {
+
+        return 0;
+    }
+    
+    if (!((b.y - b.height) <= p[3].centerY)) {
+        
+        return 0;
+    }
+    
+    if (!(b.y >= (p[3].centerY - p[3].height))) {
+        return 0;
+        
+    }
+    
+    //}
+    
+    return 1;
+
+}
 
 
-Boolean Player::checkEdges(){
+
+bool Player::checkEdges(){
     //
-    for(int j=0;j<PLAYER_WIDTH;j++){
-        for(int i=0;i<PLAYER_HEIGHT;i++){
+    for(int i=0;i<PLAYER_HEIGHT+5;i++){
+        for(int j=0;j<PLAYER_WIDTH+5;j++){
+            
             
             ofColor c = boundaryMap.getPixelsRef().getColor(location.x+j,location.y+i);
             

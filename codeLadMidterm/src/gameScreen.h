@@ -15,7 +15,7 @@
 #include "Enemy.h"
 #include "gun.h"
 #include "particle.h"
-#define NUM_OF_ENEMIES 4
+#define NUM_OF_ENEMIES 2
 
 class gameScreen:public Screen{
     

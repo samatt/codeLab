@@ -9,7 +9,7 @@ Mover::Mover(const ofVec2f & position, ofColor cor){
     
     color = cor;
     isBack = false;
-    mass = 5;
+    mass = 2;
     maxForce = 2;
     maxSpeed = 2;
     
@@ -19,8 +19,6 @@ void Mover::applyForce(const ofVec2f & force){
     ofVec2f f(force/mass);
     acceleration += f;
 }
-
-
 
 void Mover::goBack( ){
     
@@ -43,14 +41,11 @@ void Mover::goBack( ){
     
 }
 
-
 void Mover::update(){
     velocity += acceleration;
     location += velocity;
     acceleration *= 0;
 }
-
-
 
 void Mover::draw(){
     ofPushStyle();
